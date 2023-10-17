@@ -4,17 +4,20 @@ import check from "./check-solid.svg"
 
 export default function Loader(props) {
     const [progress, setProgress] = useState(0);
+    const [loaded, setLoaded] = useState(false);
     let reader = new FileReader();
     reader.readAsDataURL(props.element);
     reader.addEventListener("loadstart", e => {
-        
+
     })
     reader.addEventListener("progress", e => {
-        console.log(e.loaded)
-        setProgress( Math.round( (e.loaded/e.total)*100 ) );
+        if (!loaded) {
+            console.log(e.loaded)
+            setProgress( Math.round( (e.loaded/e.total)*100 ) );
+        }
     });
     reader.addEventListener("load", e => {
-
+        setLoaded(true);
     })
 
     function LinearProgressWithLabel(props) {
@@ -38,7 +41,8 @@ export default function Loader(props) {
             <div className="barDiv">
                 <LinearProgressWithLabel value={progress}/>
             </div>
-            <img src={URL.createObjectURL(props.element)} alt="thumbnail" className="thumbnail"/>
+            {//<img src={URL.createObjectURL(props.element)} alt="thumbnail" className="thumbnail"/>
+            }
         </div>
     )
 }
