@@ -1,25 +1,39 @@
-import logo from './logo.svg';
 import './App.css';
+import upload from "./upload-solid.svg"
+import { useRef, useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [files, setFiles] = useState([]);
+    const ref = useRef()
+
+    function handleClick() {
+        ref.current.click()
+    }
+
+    function handleSelection(e) {
+        if (e.target.files) {
+            //console.log(e.target.files)
+            let selectedFiles = Object.values(e.target.files);
+            selectedFiles.forEach(element => {
+                if (files.includes(element)) {
+                    console.log("already selected")
+                } else {
+                    setFiles([...files, element]);
+                    selectedFiles.push(element)
+                    console.log("added");
+                }
+            });
+        }
+    }
+
+    return (
+        <div className="App">
+            <div className='div'>
+                <img alt='Upload' src={upload} onClick={handleClick} className='uploadIcon'/>
+                <input ref={ref} type="file" hidden onChange={handleSelection} multiple/>
+            </div>
+        </div>
+    );
 }
 
 export default App;
