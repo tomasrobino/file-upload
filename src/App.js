@@ -14,8 +14,8 @@ function App() {
 
     function handleSelection(e) {
         if (e.target.files) {
-            //console.log(e.target.files)
             let selectedFiles = Object.values(e.target.files);
+            let toAdd = [];
             selectedFiles.forEach(element => {
                 let aux = true;
                 files.forEach(e => {
@@ -24,34 +24,19 @@ function App() {
                     }
                 });
                 if (aux) {
-                    setFiles([...files, element]);
-                    /*
-                    let reader = new FileReader();
-                    reader.readAsDataURL(element);
-                    reader.addEventListener("progress", e => {
-                        console.log("aaa")
-                        //setProgress( Math.round( (e.loaded/e.total)*100 ) );
-                    });
-                    */
-                    //loaderArr.push(<Loader element={element}/>);
-                    //console.log(loaderArr);
-                    setLoaderArr([...loaderArr, <Loader element={element} key={element.name}/>]);
-                    console.log(files);
+                    toAdd.push(element)
+                    //setFiles([...files, element]);
+                    //setLoaderArr([...loaderArr, <Loader element={element} key={element.name}/>]);
                 }
             });
+            setFiles([...files, ...toAdd]);
+            let la = [];
+            toAdd.forEach(ele => {
+                la.push(<Loader element={ele} key={ele.name}/>)
+            });
+            setLoaderArr([...loaderArr, ...la]);
         }
     }
-
-
-    /*
-    const [progress, setProgress] = useState(0);
-    let reader = new FileReader();
-    reader.readAsDataURL(props.element);
-    reader.addEventListener("progress", e => {
-        console.log(e)
-        setProgress( Math.round( (e.loaded/e.total)*100 ) );
-    });
-    */
 
     return (
         <div className="App">

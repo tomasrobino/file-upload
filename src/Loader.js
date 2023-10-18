@@ -1,6 +1,7 @@
 import { Box, CircularProgress, LinearProgress, Typography } from "@mui/material";
 import { useState } from "react"
 import check from "./check-solid.svg"
+import gif from "./Rolling-1s-200px.gif"
 
 export default function Loader(props) {
     const [progress, setProgress] = useState(0);
@@ -37,15 +38,8 @@ export default function Loader(props) {
 
     return(
         <div className="loaderDiv">
-            {//progress===100? <img alt="" src={check} className="check"/> :<CircularProgress/>
-            }
-            <div className="barDiv">
-                {//<LinearProgressWithLabel value={progress}/>
-                }
-                <LinearProgress value={progress} variant="determinate" sx={{width: "500px"}}/>
-            </div>
-            {//<img src={URL.createObjectURL(props.element)} alt="thumbnail" className="thumbnail"/>
-            }
+            <span>{props.element.name}</span>
+            <LinearProgress value={progress} variant="determinate" sx={{width: "70vw"}}/>    
         </div>
     )
 }
