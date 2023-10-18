@@ -11,7 +11,10 @@ export default function Loader(props) {
     })
     reader.addEventListener("progress", e => {
         if (!loaded) {
-            setProgress( Math.round( (e.loaded/e.total)*100 ) );
+            let math = Math.round( (e.loaded/e.total)*100 );
+            if (math > progress) {
+                setProgress(math);
+            }
         }
     });
     reader.addEventListener("load", e => {
