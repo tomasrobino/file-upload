@@ -38,8 +38,10 @@ export default function Loader(props) {
 
     return(
         <div className="loaderDiv">
-            <span>{props.element.name}</span>
-            <LinearProgress value={progress} variant="determinate" sx={{width: "70vw"}}/>    
+            <div className="name">
+                <span>{props.element.name}</span>
+            </div>
+            <LinearProgress value={progress} variant="determinate" sx={{width: "50vw"}}/>
         </div>
     )
 }

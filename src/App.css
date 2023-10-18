@@ -9,8 +9,7 @@
 }
 
 .loaderDiv {
-    margin: 10px;
-    display: flex;
+    margin: 30px;
 }
 
 .thumbnail {
@@ -20,4 +19,8 @@
 
 .check {
     width: 30px;
+}
+
+.name {
+    margin-bottom: 10px;
 }
