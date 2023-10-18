@@ -4,6 +4,8 @@ import upload from "./upload-solid.svg"
 import { useRef, useState } from 'react';
 
 function App() {
+    const ALLOWED_FILES = ["image/png", "image/jpeg", "image/gif"];
+
     const [loaderArr, setLoaderArr] = useState([]);
     const [files, setFiles] = useState([]);
     const ref = useRef()
@@ -13,8 +15,15 @@ function App() {
     }
 
     function handleSelection(e) {
-        if (e.target.files) {
-            let selectedFiles = Object.values(e.target.files);
+        let ext = true;
+        let selectedFiles = Object.values(e.target.files);
+        selectedFiles.forEach(element => {
+            if (!ALLOWED_FILES.includes(element.type)) {
+                ext = false;
+            }
+        });
+
+        if (ext) {
             let toAdd = [];
             selectedFiles.forEach(element => {
                 let aux = true;
@@ -25,8 +34,6 @@ function App() {
                 });
                 if (aux) {
                     toAdd.push(element)
-                    //setFiles([...files, element]);
-                    //setLoaderArr([...loaderArr, <Loader element={element} key={element.name}/>]);
                 }
             });
             setFiles([...files, ...toAdd]);

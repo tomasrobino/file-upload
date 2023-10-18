@@ -13,7 +13,6 @@ export default function Loader(props) {
     })
     reader.addEventListener("progress", e => {
         if (!loaded) {
-            console.log(e.loaded)
             setProgress( Math.round( (e.loaded/e.total)*100 ) );
         }
     });
