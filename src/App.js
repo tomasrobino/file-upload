@@ -17,7 +17,13 @@ function App() {
             //console.log(e.target.files)
             let selectedFiles = Object.values(e.target.files);
             selectedFiles.forEach(element => {
-                if (!files.includes(element)) {
+                let aux = true;
+                files.forEach(e => {
+                    if (e.name === element.name) {
+                        aux = false;
+                    }
+                });
+                if (aux) {
                     setFiles([...files, element]);
                     /*
                     let reader = new FileReader();
@@ -28,7 +34,9 @@ function App() {
                     });
                     */
                     //loaderArr.push(<Loader element={element}/>);
-                    setLoaderArr([...loaderArr, <Loader element={element}/>]);
+                    //console.log(loaderArr);
+                    setLoaderArr([...loaderArr, <Loader element={element} key={element.name}/>]);
+                    console.log(files);
                 }
             });
         }

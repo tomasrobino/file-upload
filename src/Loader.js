@@ -37,9 +37,12 @@ export default function Loader(props) {
 
     return(
         <div className="loaderDiv">
-            {progress===100? <img alt="" src={check} className="check"/> :<CircularProgress/>}
+            {//progress===100? <img alt="" src={check} className="check"/> :<CircularProgress/>
+            }
             <div className="barDiv">
-                <LinearProgressWithLabel value={progress}/>
+                {//<LinearProgressWithLabel value={progress}/>
+                }
+                <LinearProgress value={progress} variant="determinate" sx={{width: "500px"}}/>
             </div>
             {//<img src={URL.createObjectURL(props.element)} alt="thumbnail" className="thumbnail"/>
             }
