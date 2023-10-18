@@ -16,41 +16,51 @@ function App() {
     }
 
     function handleSelection(e) {
-        let ext = true;
-        let selectedFiles = Object.values(e.target.files);
-        selectedFiles.forEach(element => {
-            if (!ALLOWED_FILES.includes(element.type)) {
-                ext = false;
-            }
-        });
-
-        if (ext) {
-            let toAdd = [];
+        if (e.target.files.length + files.length < 6) {
+            let ext = true;
+            let selectedFiles = Object.values(e.target.files);
             selectedFiles.forEach(element => {
-                let aux = true;
-                files.forEach(e => {
-                    if (e.name === element.name) {
-                        aux = false;
-                    }
-                });
-                if (aux) {
-                    toAdd.push(element)
+                if (!ALLOWED_FILES.includes(element.type)) {
+                    ext = false;
                 }
             });
-            setFiles([...files, ...toAdd]);
-            let la = [];
-            toAdd.forEach(ele => {
-                la.push(<Loader element={ele} key={ele.name}/>)
-            });
-            setLoaderArr([...loaderArr, ...la]);
+
+            if (ext) {
+                let toAdd = [];
+                selectedFiles.forEach(element => {
+                    let aux = true;
+                    files.forEach(e => {
+                        if (e.name === element.name) {
+                            aux = false;
+                        }
+                    });
+                    if (aux) {
+                        toAdd.push(element)
+                    }
+                });
+                setFiles([...files, ...toAdd]);
+                let la = [];
+                toAdd.forEach(ele => {
+                    la.push(<Loader element={ele} key={ele.name}/>)
+                });
+                setLoaderArr([...loaderArr, ...la]);
+            } else {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Sólo se pueden seleccionar archivos con tipo JPG, JPEG, GIF o PNG",
+                    icon: "error",
+                    confirmButtonText: "Aceptar"
+                })
+            }
         } else {
             Swal.fire({
                 title: "Error!",
-                text: "Sólo se pueden seleccionar archivos con tipo JPG, JPEG, GIF o PNG",
+                text: "No puedes cargar más de cinco archivos",
                 icon: "error",
                 confirmButtonText: "Aceptar"
             })
         }
+        
     }
 
     return (
