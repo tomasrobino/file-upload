@@ -1,4 +1,3 @@
-import { LinearProgress } from "@mui/material";
 import { useState } from "react"
 
 export default function Loader(props) {
@@ -26,7 +25,7 @@ export default function Loader(props) {
             <div className="name">
                 <span>{props.element.name}</span>
             </div>
-            <LinearProgress value={progress} variant="determinate" sx={{width: "50vw"}}/>
+            <progress value={progress} max="100" className="progress"></progress>
         </div>
     )
 }
