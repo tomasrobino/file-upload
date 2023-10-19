@@ -2,7 +2,6 @@ import './App.css';
 import Loader from './Loader';
 import upload from "./upload-solid.svg"
 import { useRef, useState } from 'react';
-import Swal from 'sweetalert2';
 
 function App() {
     const ALLOWED_FILES = ["image/png", "image/jpeg", "image/gif"];
@@ -45,20 +44,10 @@ function App() {
                 });
                 setLoaderArr([...loaderArr, ...la]);
             } else {
-                Swal.fire({
-                    title: "Error!",
-                    text: "Sólo se pueden seleccionar archivos con tipo JPG, JPEG, GIF o PNG",
-                    icon: "error",
-                    confirmButtonText: "Aceptar"
-                })
+                alert("Sólo se pueden seleccionar archivos con tipo JPG, JPEG, GIF o PNG");
             }
         } else {
-            Swal.fire({
-                title: "Error!",
-                text: "No puedes cargar más de cinco archivos",
-                icon: "error",
-                confirmButtonText: "Aceptar"
-            })
+            alert("No puedes cargar más de cinco archivos");
         }
         
     }
